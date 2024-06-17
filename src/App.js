@@ -1,23 +1,23 @@
 import './App.css';
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Sidebar from "./components/Sidebar";
-import image from './image.png'
-import Btn from "./components/Btn";
-import ModeToggler from "./components/ModeToggler";
-
-const Logo = () => <img alt="alt" src={image}></img>
+import {useState} from "react";
 
 function App() {
+    const [time, setTime] = useState(0);
+
+    const addTime = () => setTime(time+1)
+    const substractTime = () => {
+        if (time > 0) setTime(time-1)
+    }
   return (
-    <div>
-        <Btn />
-        <ModeToggler />
-        <Logo />
-        <Header name="Anna" color="purple" />
-        <Main greet="Howdy" />
-        <Sidebar greet="Howdy" />
-    </div>
+    <>
+        <section>
+            {time}
+        </section>
+        <section>
+            <button onClick={addTime}>+</button>
+            <button onClick={substractTime}>-</button>
+        </section>
+    </>
   );
 }
 
