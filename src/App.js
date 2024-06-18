@@ -1,7 +1,11 @@
 import './App.css';
 import {useState} from "react";
+import {Button, Grid} from "@mui/material";
 
 function App() {
+    const mainContainerStyles = {minWidth: '100vw', minHeight: '100vh' };
+    const numberStyles = {margin: 'auto', textAlign: 'center', verticalAlign: 'middle', fontSize: '16em', minHeight: '90vh' };
+    const buttonStyles = {textAlign: 'center'};
     const [time, setTime] = useState(0);
     const [startEnabled, setStartEnabled] = useState(true);
 
@@ -24,14 +28,20 @@ function App() {
 
   return (
     <>
-        <section>
-            {time}
-        </section>
-        <section>
-            <button onClick={substractTime}>-</button>
-            <button disabled={!startEnabled} onClick={start}>start</button>
-            <button onClick={addTime}>+</button>
-        </section>
+        <Grid container style={mainContainerStyles}>
+            <Grid xs={12} style={numberStyles}>
+                <p>{time}</p>
+            </Grid>
+            <Grid xs={4} style={buttonStyles}>
+                <Button onClick={substractTime}>-</Button>
+            </Grid>
+            <Grid xs={4} style={buttonStyles}>
+                <Button disabled={!startEnabled} onClick={start}>start</Button>
+            </Grid>
+            <Grid xs={4} style={buttonStyles}>
+                <Button onClick={addTime}>+</Button>
+            </Grid>
+        </Grid>
     </>
   );
 }
