@@ -28,9 +28,9 @@ function App() {
             {time}
         </section>
         <section>
-            <button onClick={addTime}>+</button>
-            <button disabled={!startEnabled} onClick={start}>start</button>
             <button onClick={substractTime}>-</button>
+            <button disabled={!startEnabled} onClick={start}>start</button>
+            <button onClick={addTime}>+</button>
         </section>
     </>
   );
