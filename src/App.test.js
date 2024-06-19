@@ -44,17 +44,25 @@ describe('a stopwatch', () => {
     expect(await screen.findByText("0")).toBeInTheDocument();
   });
 
-  test('it disables start button when the countdown starts', async () => {
+  test.each([
+      ['+'],
+      ['-'],
+      ['start']
+  ])('it disables %s button when the countdown starts', async (disabledButtonText) => {
     render(<App/>);
     const plusButton = screen.getByRole("button", {name: "+"});
     await userEvent.click(plusButton);
     await userEvent.click(plusButton);
     const startButton = screen.getByRole("button", {name: "start"});
     await userEvent.click(startButton);
-    expect(startButton).toBeDisabled();
+    expect(screen.getByRole("button", {name: disabledButtonText})).toBeDisabled();
   });
 
-  test('it enables start button when the countdown finishes', async () => {
+  test.each([
+    ['+'],
+    ['-'],
+    ['start']
+  ])('it enables %s button when the countdown finishes', async (enabledButtonText) => {
     render(<App/>);
     const plusButton = screen.getByRole("button", {name: "+"});
     await userEvent.click(plusButton);
@@ -64,7 +72,7 @@ describe('a stopwatch', () => {
     expect(await screen.findByText("2")).toBeInTheDocument();
     expect(await screen.findByText("1")).toBeInTheDocument();
     expect(await screen.findByText("0")).toBeInTheDocument();
-    await waitFor(() => expect(startButton).toBeEnabled());
+    await waitFor(() => expect(screen.getByRole("button", {name: enabledButtonText})).toBeEnabled());
   });
 });
 
