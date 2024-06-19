@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/reports
 
 # production
 /build
@@ -24,3 +25,6 @@ yarn-error.log*
 
 # stryker temp files
 .stryker-tmp
+
+# idea
+.idea
