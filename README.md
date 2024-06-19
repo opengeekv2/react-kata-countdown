@@ -26,7 +26,7 @@ As sometimes it is difficult to validate certain situations just by rendering th
 also mutation testing with [Stryker](https://stryker-mutator.io/docs/stryker-js/introduction/) that works well with
 React.
 
-## Respoitory instructions
+## Repository instructions
 
 ## Getting Started with Create React App
 
