@@ -11,14 +11,14 @@ Learn about state and testing in React
 
 The requirements are the following:
 * A counter should be displayed all the time.
-* That counter should be initialited to zero.
-* A + button should be displayed and should add seconds by units on click.
-* A - button should be displayed and should substract seconds by units on click.
+* That counter should be initialized to zero.
+* A + button should be displayed and should add a second on click.
+* A - button should be displayed and should substract a second on click.
 * The - button should not substract past zero.
 * A start button should be displayed and should start a countdown substracting one unit per second.
 * The countdown should finish at 0.
-* While the countdown is running the start button should be disabled.
-* The start button should be re-enabled when the countdown is over.
+* While the countdown is running the +, - and start buttons should be disabled.
+* The +, -, and start buttons should be re-enabled when the countdown is over.
 
 ### Variants
 
