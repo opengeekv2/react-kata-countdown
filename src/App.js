@@ -2,6 +2,28 @@ import './App.css';
 import {useState} from "react";
 import {Button, Grid} from "@mui/material";
 
+const addTime = (setTime) => {
+    setTime((time) => time + 1);
+}
+const substractTime = (setTime) => {
+    setTime((time) => {
+        if (time > 0) return time - 1;
+        return time;
+    });
+}
+
+const startCountdown = (setTime, setControlsEnabled) => {
+    setControlsEnabled(false);
+    const intervalId = setInterval(() => {
+        setTime((time) => {
+            if (time > 0) return time - 1;
+            clearInterval(intervalId);
+            setControlsEnabled(true);
+            return time;
+        });
+    }, 1000);
+}
+
 function App() {
     // Stryker disable next-line all
     const mainContainerStyles = {minWidth: '100vw', minHeight: '100vh' };
@@ -12,21 +34,9 @@ function App() {
     const [time, setTime] = useState(0);
     const [controlsEnabled, setControlsEnabled] = useState(true);
 
-    const addTime = () => setTime(time+1)
-    const substractTime = () => {
-        if (time > 0) setTime(time-1);
-    }
-    const start = () => {
-        setControlsEnabled(false);
-        const intervalId = setInterval(() => {
-            setTime((time) => {
-                if (time > 0) return time - 1;
-                clearInterval(intervalId);
-                setControlsEnabled(true);
-                return time;
-            });
-        }, 1000);
-    }
+    const addTimeHandler = () => addTime(setTime);
+    const substractTimeHandler = () => substractTime(setTime);
+    const startHandler = () => startCountdown(setTime, setControlsEnabled);
 
   return (
     <>
@@ -35,13 +45,13 @@ function App() {
                 <p>{time}</p>
             </Grid>
             <Grid xs={4} style={buttonStyles}>
-                <Button disabled={!controlsEnabled} onClick={substractTime}>-</Button>
+                <Button disabled={!controlsEnabled} onClick={substractTimeHandler}>-</Button>
             </Grid>
             <Grid xs={4} style={buttonStyles}>
-                <Button disabled={!controlsEnabled} onClick={start}>start</Button>
+                <Button disabled={!controlsEnabled} onClick={startHandler}>start</Button>
             </Grid>
             <Grid xs={4} style={buttonStyles}>
-                <Button disabled={!controlsEnabled} onClick={addTime}>+</Button>
+                <Button disabled={!controlsEnabled} onClick={addTimeHandler}>+</Button>
             </Grid>
         </Grid>
     </>

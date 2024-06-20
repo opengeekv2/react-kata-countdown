@@ -39,8 +39,8 @@ describe('a stopwatch', () => {
     await userEvent.click(plusButton);
     const startButton = screen.getByRole("button", {name: "start"});
     await userEvent.click(startButton);
-    expect(await screen.findByText("2")).toBeInTheDocument();
-    expect(await screen.findByText("1")).toBeInTheDocument();
+    await screen.findByText("2");
+    await screen.findByText("1");
     expect(await screen.findByText("0")).toBeInTheDocument();
   });
 
@@ -53,8 +53,7 @@ describe('a stopwatch', () => {
     const plusButton = screen.getByRole("button", {name: "+"});
     await userEvent.click(plusButton);
     await userEvent.click(plusButton);
-    const startButton = screen.getByRole("button", {name: "start"});
-    await userEvent.click(startButton);
+    await userEvent.click(screen.getByRole("button", {name: "start"}));
     expect(screen.getByRole("button", {name: disabledButtonText})).toBeDisabled();
   });
 
@@ -67,11 +66,10 @@ describe('a stopwatch', () => {
     const plusButton = screen.getByRole("button", {name: "+"});
     await userEvent.click(plusButton);
     await userEvent.click(plusButton);
-    const startButton = screen.getByRole("button", {name: "start"});
-    await userEvent.click(startButton);
-    expect(await screen.findByText("2")).toBeInTheDocument();
-    expect(await screen.findByText("1")).toBeInTheDocument();
-    expect(await screen.findByText("0")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", {name: "start"}));
+    await screen.findByText("2");
+    await screen.findByText("1");
+    await screen.findByText("0");
     await waitFor(() => expect(screen.getByRole("button", {name: enabledButtonText})).toBeEnabled());
   });
 });
