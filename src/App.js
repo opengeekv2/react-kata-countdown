@@ -2,20 +2,21 @@ import './App.css';
 import {useState} from "react";
 import {Button, Grid} from "@mui/material";
 
-const addTime = (setTime) => {
-    setTime((time) => time + 1);
-}
-const substractTime = (setTime) => {
-    setTime((time) => {
-        if (time > 0) return time - 1;
-        return time;
-    });
-}
+// Stryker disable next-line all
+const mainContainerStyles = {minWidth: '100vw', minHeight: '100vh' };
+// Stryker disable next-line all
+const numberStyles = {margin: 'auto', textAlign: 'center', verticalAlign: 'middle', fontSize: '16em', minHeight: '90vh' };
+// Stryker disable next-line all
+const buttonStyles = {textAlign: 'center'};
+
+const addTime = setTime => setTime(time => time + 1);
+
+const substractTime = setTime => setTime(time => time > 0 ?  time - 1 : time);
 
 const startCountdown = (setTime, setControlsEnabled) => {
     setControlsEnabled(false);
     const intervalId = setInterval(() => {
-        setTime((time) => {
+        setTime(time => {
             if (time > 0) return time - 1;
             clearInterval(intervalId);
             setControlsEnabled(true);
@@ -25,18 +26,12 @@ const startCountdown = (setTime, setControlsEnabled) => {
 }
 
 function App() {
-    // Stryker disable next-line all
-    const mainContainerStyles = {minWidth: '100vw', minHeight: '100vh' };
-    // Stryker disable next-line all
-    const numberStyles = {margin: 'auto', textAlign: 'center', verticalAlign: 'middle', fontSize: '16em', minHeight: '90vh' };
-    // Stryker disable next-line all
-    const buttonStyles = {textAlign: 'center'};
     const [time, setTime] = useState(0);
     const [controlsEnabled, setControlsEnabled] = useState(true);
 
-    const addTimeHandler = () => addTime(setTime);
-    const substractTimeHandler = () => substractTime(setTime);
-    const startHandler = () => startCountdown(setTime, setControlsEnabled);
+    const addTimeHandler = addTime.bind(undefined, setTime);
+    const substractTimeHandler = substractTime.bind(undefined, setTime);
+    const startHandler = startCountdown.bind(undefined, setTime, setControlsEnabled);
 
   return (
     <>
